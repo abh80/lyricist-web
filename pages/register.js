@@ -61,6 +61,12 @@ export default class Register extends Component {
       this.triggerPasswordErr();
       return document.querySelector("#password").focus();
     }
+    const terms = document.querySelector("#terms").checked;
+    if (!terms) {
+      document.querySelector("#terms-err").textContent =
+        "You must agree to the terms or use";
+      return;
+    }
     try {
       const data = await fetch(`${apiUrl}/users`, {
         method: "POST",
@@ -102,7 +108,7 @@ export default class Register extends Component {
       <div className="items-center justify-center w-full h-full">
         <Header title="Register" />
 
-        <div className="bg-white w-1/4 shadow-xl p-5 rounded-xl mx-auto min-w-fit mt-10">
+        <div className="bg-white w-1/4 shadow-xl p-5 md:rounded-xl mx-auto min-w-fit mt-10">
           <h1 className="text-3xl font-bold block">Register</h1>
           <h2 className="block text-md font-medium">
             Join the world of lyrics!
@@ -191,9 +197,28 @@ export default class Register extends Component {
                 this.setState({ response });
               }}
             />
+
             <span
               className="text-red-600 font-medium text-sm relative block"
               id="captcha-err"
+            ></span>
+            <div className="h-5 w-full"></div>
+            <label>
+              <input
+                type="checkbox"
+                onChange={() =>
+                  (document.querySelector("#terms-err").textContent = "")
+                }
+                id="terms"
+              />{" "}
+              I agree to the{" "}
+              <Link href="/terms-of-use">
+                <a className="text-blue-700 hover:underline">terms of use</a>
+              </Link>
+            </label>
+            <span
+              id="terms-err"
+              className="text-red-600 font-medium text-sm relative block"
             ></span>
             <div className="h-2 w-full"></div>
             <button

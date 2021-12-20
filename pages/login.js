@@ -91,7 +91,7 @@ export default class Login extends Component {
       <div className="items-center justify-center w-full h-full">
         <Header title="Login" />
 
-        <div className="bg-white w-1/4 shadow-xl p-5 rounded-xl mx-auto min-w-fit mt-10">
+        <div className="bg-white w-1/4 shadow-xl p-5 md:rounded-xl mx-auto min-w-fit mt-10">
           <h1 className="text-3xl font-bold block">Login</h1>
           <h2 className="block text-md font-medium">
             Resume the world of lyrics!
