@@ -10,6 +10,7 @@ export default class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       response: null,
+      spin: false,
     };
     this.captchaRef = createRef();
   }
@@ -24,6 +25,7 @@ export default class Register extends Component {
   }
   async handleSubmit(e) {
     e.preventDefault();
+    if(this.state.spin) return;
     if (!this.state.response) {
       document.querySelector("#captcha-err").textContent =
         "Please verify captcha first";
@@ -68,6 +70,7 @@ export default class Register extends Component {
       return;
     }
     try {
+      this.setState({ spin: true });
       const data = await fetch(`${apiUrl}/users`, {
         method: "POST",
         headers: {
@@ -81,6 +84,7 @@ export default class Register extends Component {
         }),
       });
       const json = await data.json();
+      this.setState({ spin: false });
       if (data.status != 200) {
         this.triggerEmailErr();
         this.triggerPasswordErr();
@@ -91,11 +95,16 @@ export default class Register extends Component {
       }
       window.location.href = "/email-verification?session=" + json.session;
     } catch {
+      this.setState({ spin: false });
       this.triggerEmailErr();
       this.triggerPasswordErr();
       document.querySelector("#password-err").textContent =
         "Server ran into an error, try again later";
     }
+  }
+  lockSubmit() {
+    document.querySelector("#con-btn").disabled = true;
+    document.querySelector("#con-btn").style.cursor = "not-allowed";
   }
   componentDidMount() {
     const token = localStorage.getItem("token");
@@ -226,7 +235,39 @@ export default class Register extends Component {
               disabled
               className="cursor-not-allowed block mt-10 text-center border-none outline-none focus:outline-none w-full bg-orange-400 text-white p-3 hover:bg-orange-500 focus:bg-orange-500 rounded-full transition-all"
             >
-              Join
+              <div className="w-fit mx-auto flex">
+                <svg
+                  className={
+                    "animate-spin -ml-1 mr-3 h-5 w-5 text-white" +
+                    (this.state.spin ? "" : " hidden")
+                  }
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+
+                <span
+                  className={
+                    "font-semibold" + (!this.state.spin ? "" : " hidden")
+                  }
+                >
+                  Join
+                </span>
+              </div>
             </button>
           </form>
         </div>

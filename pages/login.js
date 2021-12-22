@@ -3,6 +3,7 @@ import Header from "../components/Header";
 const { apiUrl, recaptcha_site_key } = require("../config.json");
 import Recaptcha from "reaptcha";
 import Link from "next/link";
+import styles from "../styles/Login.module.css";
 
 export default class Login extends Component {
   constructor() {
@@ -11,7 +12,18 @@ export default class Login extends Component {
     this.captchaRef = createRef();
     this.state = {
       response: null,
+      spin: null,
     };
+    this.code = {
+      "remove-border-on-change": false,
+    };
+  }
+  removeBorderFromBoth() {
+    document.querySelector("#email").style.border = "1px solid black";
+    document.querySelector("#password-parent").style.border = "1px solid black";
+    document.querySelector("#email-err").textContent = "";
+    document.querySelector("#password-err").textContent = "";
+    this.code["remove-border-on-change"] = false;
   }
   triggerEmailErr() {
     document.querySelector("#email").style.border = "2px solid red";
@@ -21,6 +33,7 @@ export default class Login extends Component {
   }
   async handleSubmit(e) {
     e.preventDefault();
+    if (this.state.spin) return;
     if (!this.state.response) {
       document.querySelector("#captcha-err").textContent =
         "Please verify captcha first";
@@ -41,6 +54,7 @@ export default class Login extends Component {
       return document.querySelector("#password").focus();
     }
     try {
+      this.setState({ spin: true });
       const data = await fetch(`${apiUrl}/s/login`, {
         method: "POST",
         headers: {
@@ -55,9 +69,11 @@ export default class Login extends Component {
 
       const json = await data.json();
       if (data.status != 200) {
+        this.setState({ spin: false });
         this.triggerEmailErr();
         this.triggerPasswordErr();
         document.querySelector("#password-err").textContent = json.message;
+        this.code["remove-border-on-change"] = true;
         if (!this.captchaRef) return;
         this.captchaRef.current.reset();
         return;
@@ -74,6 +90,9 @@ export default class Login extends Component {
       );
       window.location.href = "/dashboard";
     } catch (e) {
+      this.setState({ spin: false });
+      this.code["remove-border-on-change"] = true;
+      this.captchaRef.current.reset();
       this.triggerEmailErr();
       this.triggerPasswordErr();
       document.querySelector("#password-err").textContent =
@@ -97,37 +116,58 @@ export default class Login extends Component {
             Resume the world of lyrics!
           </h2>
           <form onSubmit={this.handleSubmit}>
-            <input
-              id="email"
-              type={"text"}
-              className="w-full h-12 border border-gray-900 rounded my-5 p-2 focus:outline-none"
-              placeholder="Email"
-              onChange={() => {
-                document.querySelector("#email-err").textContent = "";
-                document.querySelector("#email").style.border =
-                  "1px solid black";
-              }}
-            />
+            <div
+              className={"h-12 w-full my-5 relative " + styles["input-wrapper"]}
+            >
+              <input
+                id="email"
+                type={"text"}
+                className="w-full h-full border border-gray-900 rounded focus:outline-none"
+                placeholder="Email"
+                onChange={() => {
+                  if (this.code["remove-border-on-change"])
+                    return this.removeBorderFromBoth();
+                  document.querySelector("#email-err").textContent = "";
+                  document.querySelector("#email").style.border =
+                    "1px solid black";
+                }}
+              />
+              <span className={styles["floating-label"] + " text-gray-500"}>
+                Email
+              </span>
+            </div>
             <span
               id="email-err"
               className="text-red-600 font-medium text-sm relative"
               style={{ top: "-15px" }}
             ></span>
             <div
-              className="flex gap-10 w-full h-12 border border-gray-900 rounded my-2 min-w-fit"
+              className={
+                "flex gap-10 w-full h-12 border border-gray-900 rounded my-2 min-w-fit relative " +
+                styles["input-wrapper"]
+              }
+              style={{
+                paddingLeft: "2px",
+                paddingRight: "2px",
+              }}
               id="password-parent"
             >
               <input
                 id="password"
                 type={"password"}
-                className="w-2/3 mx-1 h-11 p-2 focus:outline-none"
                 placeholder="Password"
+                className="w-2/3 h-11 focus:outline-none"
                 onChange={() => {
+                  if (this.code["remove-border-on-change"])
+                    return this.removeBorderFromBoth();
                   document.querySelector("#password-err").textContent = "";
                   document.querySelector("#password-parent").style.border =
                     "1px solid black";
                 }}
               />
+              <span className={styles["floating-label"] + " text-gray-500"}>
+                Password
+              </span>
               <span
                 className="text-sm mt-2 h-fit mx-2 font-medium hover:cursor-pointer hover:bg-orange-300 rounded-full px-3 py-1.5 transition-all"
                 onClick={(e) => {
@@ -175,9 +215,41 @@ export default class Login extends Component {
             <button
               id="con-btn"
               disabled
-              className="cursor-not-allowed block mt-10 text-center border-none outline-none focus:outline-none w-full bg-orange-400 text-white p-3 hover:bg-orange-500 focus:bg-orange-500 rounded-full transition-all"
+              className="flex cursor-not-allowed block mt-10 text-center border-none outline-none focus:outline-none w-full bg-orange-400 text-white p-3 hover:bg-orange-500 focus:bg-orange-500 rounded-full transition-all"
             >
-              Continue
+              <div className="w-fit mx-auto flex">
+                <svg
+                  className={
+                    "animate-spin -ml-1 mr-3 h-5 w-5 text-white" +
+                    (this.state.spin ? "" : " hidden")
+                  }
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+
+                <span
+                  className={
+                    "font-semibold" + (!this.state.spin ? "" : " hidden")
+                  }
+                >
+                  Continue
+                </span>
+              </div>
             </button>
           </form>
         </div>

@@ -17,7 +17,7 @@ export default function not_found() {
         </div>
         <div className="flex mt-5 mx-auto w-fit">
           <Link href="/" passHref>
-            <button className="w-fit p-2 bg-orange-500 text-white hover:bg-orange-600 rounded-md shadow-lg">
+            <button className="w-fit p-2 bg-orange-500 text-white hover:bg-orange-600 rounded-md shadow-lg transition-colors">
               Go to home
             </button>
           </Link>
