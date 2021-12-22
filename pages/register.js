@@ -116,7 +116,7 @@ export default class Register extends Component {
     return (
       <>
         <Header title="Register" />
-        <div className="items-center overflow-hidden justify-center w-fit h-fit mx-auto relative md:mt-0 mt-20 top-1/2 -translate-y-1/2">
+        <div className="items-center overflow-hidden justify-center w-full h-fit mx-auto relative md:mt-0 mt-20 top-1/2 -translate-y-1/2">
           <div className="bg-white w-1/4 shadow-xl relative p-5 md:rounded-xl mx-auto min-w-fit mt-10">
             <h1 className="text-3xl font-bold block">Register</h1>
             <h2 className="block text-md font-medium">

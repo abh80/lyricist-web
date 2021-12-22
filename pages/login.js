@@ -109,8 +109,8 @@ export default class Login extends Component {
     return (
       <>
         <Header title="Login" />
-        <div className="items-center justify-center w-fit h-fit mx-auto overflow-hidden relative md:mt-0 mt-10 top-1/2 -translate-y-1/2">
-          <div className="bg-white relative w-1/4 shadow-xl p-5 md:rounded-xl mx-auto min-w-fit ">
+        <div className="items-center justify-center w-full h-fit mx-auto overflow-hidden relative md:mt-0 mt-10 top-1/2 -translate-y-1/2">
+          <div className="bg-white relative w-1/4 shadow-xl p-5 md:rounded-xl mx-auto min-w-fit">
             <h1 className="text-3xl font-bold block">Login</h1>
             <h2 className="block text-md font-medium">
               Resume the world of lyrics!

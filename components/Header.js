@@ -21,7 +21,7 @@ export default function Header({ title }) {
         <div className="md:hidden flex absolute right-5 top-8">
           <button
             id="open-menu-btn"
-            className="focus:outline-none focus:border-2 rounded-md p-2 focus:border-orange-500"
+            className="focus:outline-none focus:border-2 rounded-md p-1 focus:border-orange-500"
             onClick={() => {
               document.querySelector("#mobile-menu").classList.toggle("hidden");
               document.querySelector("#close-menu-btn").focus();
@@ -85,11 +85,35 @@ export default function Header({ title }) {
                 </svg>
               </button>
             </div>
-            <div className="grid grid-rows-2 grid-flow-col gap-5">
+            <div className="grid grid-rows-2 grid-flow-row gap-5 m-10">
+              <Link href="/">
+                <a className="font-bold text-lg hover:text-orange-500 transition-colors my-2">
+                  Home
+                </a>
+              </Link>
               <Link href="/about">
                 <a className="font-bold text-lg hover:text-orange-500 transition-colors my-2">
                   About Us
                 </a>
+              </Link>
+            </div>
+            <div
+              className="absolute bottom-10 flex gap-2"
+              style={{
+                left: "5%",
+                right: "5%",
+                width: "90%",
+              }}
+            >
+              <Link href="/login" passHref>
+                <button className="rounded-full w-1/2 border-2 hover:bg-orange-600 bg-orange-500 py-2 border-transparent text-white transition-colors px-4 font-bold text-md w-1/2">
+                  Login
+                </button>
+              </Link>
+              <Link href="/register" passHref>
+                <button className="rounded-full border-2 border-gray-900 hover:bg-slate-200 transition-colors px-4 font-bold text-md w-1/2">
+                  Register
+                </button>
               </Link>
             </div>
           </div>

@@ -43,3 +43,6 @@ a {
 .tou-list {
   padding-left: 10px;
 }
+button {
+  -webkit-tap-highlight-color: transparent;
+}
