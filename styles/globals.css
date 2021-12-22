@@ -28,6 +28,8 @@ a {
 }
 .hero-banner {
   background: rgb(255, 138, 78);
+  position: relative;
+  top: 100px;
   background: linear-gradient(
     to bottom,
     rgba(255, 138, 78, 1) 0%,
@@ -41,4 +43,3 @@ a {
 .tou-list {
   padding-left: 10px;
 }
-

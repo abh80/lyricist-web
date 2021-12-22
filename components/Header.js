@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Header({ title }) {
   return (
-    <>
+    <div className="absolute top-0 w-full h-full">
       <Head>
         <title>{title}</title>
       </Head>
@@ -44,13 +44,16 @@ export default function Header({ title }) {
           </button>
         </div>
         <div
-          className="select-none hidden absolute block md:hidden w-full p-5 h-full backdrop-blur-lg"
+          className="z-10 select-none hidden absolute block md:hidden w-full p-5 h-full backdrop-blur-lg"
           id="mobile-menu"
         >
-          <div className="r-menu block bg-slate-100 w-full h-full shadow-xl rounded-lg p-5 transition-all" style={{
-            transitionDuration: "0.25s",
-            transform: "scale(0)"
-          }}>
+          <div
+            className="z-10 r-menu block bg-slate-100 w-full h-full shadow-xl rounded-lg p-5 transition-all"
+            style={{
+              transitionDuration: "0.25s",
+              transform: "scale(0)",
+            }}
+          >
             <div className="flex">
               <Image src="/logo-round.png" alt="logo" width="50" height="50" />
               <button
@@ -82,6 +85,13 @@ export default function Header({ title }) {
                 </svg>
               </button>
             </div>
+            <div className="grid grid-rows-2 grid-flow-col gap-5">
+              <Link href="/about">
+                <a className="font-bold text-lg hover:text-orange-500 transition-colors my-2">
+                  About Us
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
         <div className="gap-5 p-5 right-0 absolute hidden md:flex">
@@ -98,6 +108,6 @@ export default function Header({ title }) {
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }

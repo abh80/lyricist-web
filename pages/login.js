@@ -107,161 +107,166 @@ export default class Login extends Component {
   }
   render() {
     return (
-      <div className="items-center justify-center w-full h-full">
+      <>
         <Header title="Login" />
-
-        <div className="bg-white w-1/4 shadow-xl p-5 md:rounded-xl mx-auto min-w-fit mt-10">
-          <h1 className="text-3xl font-bold block">Login</h1>
-          <h2 className="block text-md font-medium">
-            Resume the world of lyrics!
-          </h2>
-          <form onSubmit={this.handleSubmit}>
-            <div
-              className={"h-12 w-full my-5 relative " + styles["input-wrapper"]}
-            >
-              <input
-                id="email"
-                type={"text"}
-                className="w-full h-full border border-gray-900 rounded focus:outline-none"
-                placeholder="Email"
-                onChange={() => {
-                  if (this.code["remove-border-on-change"])
-                    return this.removeBorderFromBoth();
-                  document.querySelector("#email-err").textContent = "";
-                  document.querySelector("#email").style.border =
-                    "1px solid black";
-                }}
-              />
-              <span className={styles["floating-label"] + " text-gray-500"}>
-                Email
-              </span>
-            </div>
-            <span
-              id="email-err"
-              className="text-red-600 font-medium text-sm relative"
-              style={{ top: "-15px" }}
-            ></span>
-            <div
-              className={
-                "flex gap-10 w-full h-12 border border-gray-900 rounded my-2 min-w-fit relative " +
-                styles["input-wrapper"]
-              }
-              style={{
-                paddingLeft: "2px",
-                paddingRight: "2px",
-              }}
-              id="password-parent"
-            >
-              <input
-                id="password"
-                type={"password"}
-                placeholder="Password"
-                className="w-2/3 h-11 focus:outline-none"
-                onChange={() => {
-                  if (this.code["remove-border-on-change"])
-                    return this.removeBorderFromBoth();
-                  document.querySelector("#password-err").textContent = "";
-                  document.querySelector("#password-parent").style.border =
-                    "1px solid black";
-                }}
-              />
-              <span className={styles["floating-label"] + " text-gray-500"}>
-                Password
-              </span>
-              <span
-                className="text-sm mt-2 h-fit mx-2 font-medium hover:cursor-pointer hover:bg-orange-300 rounded-full px-3 py-1.5 transition-all"
-                onClick={(e) => {
-                  const current = e.target.textContent;
-                  if (current == "Show") {
-                    e.target.textContent = "Hide";
-                    document.getElementById("password").type = "text";
-                  } else {
-                    e.target.textContent = "Show";
-                    document.getElementById("password").type = "password";
-                  }
-                }}
+        <div className="items-center justify-center w-fit h-fit mx-auto overflow-hidden relative md:mt-0 mt-10 top-1/2 -translate-y-1/2">
+          <div className="bg-white relative w-1/4 shadow-xl p-5 md:rounded-xl mx-auto min-w-fit ">
+            <h1 className="text-3xl font-bold block">Login</h1>
+            <h2 className="block text-md font-medium">
+              Resume the world of lyrics!
+            </h2>
+            <form onSubmit={this.handleSubmit}>
+              <div
+                className={
+                  "h-12 w-full my-5 relative " + styles["input-wrapper"]
+                }
               >
-                Show
-              </span>
-            </div>
-            <span
-              id="password-err"
-              className="text-red-600 font-medium text-sm relative block"
-              style={{ top: "-5px" }}
-            ></span>
-            <Link href="/resetpwd">
-              <a className="text-blue-700 font-medium text-md hover:underline">
-                Forgot password?
-              </a>
-            </Link>
-            <div className="h-5 w-full"></div>
-            <Recaptcha
-              ref={this.captchaRef}
-              sitekey={recaptcha_site_key}
-              onVerify={(response) => {
-                document.querySelector("#captcha-err").textContent = "";
-                document.querySelector("#con-btn").disabled = false;
-                document
-                  .querySelector("#con-btn")
-                  .classList.replace("cursor-not-allowed", "cursor-pointer");
-                this.setState({ response });
-              }}
-            />
-            <span
-              className="text-red-600 font-medium text-sm relative block"
-              id="captcha-err"
-            ></span>
-            <div className="h-2 w-full"></div>
-            <button
-              id="con-btn"
-              disabled
-              className="flex cursor-not-allowed block mt-10 text-center border-none outline-none focus:outline-none w-full bg-orange-400 text-white p-3 hover:bg-orange-500 focus:bg-orange-500 rounded-full transition-all"
-            >
-              <div className="w-fit mx-auto flex">
-                <svg
-                  className={
-                    "animate-spin -ml-1 mr-3 h-5 w-5 text-white" +
-                    (this.state.spin ? "" : " hidden")
-                  }
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-
-                <span
-                  className={
-                    "font-semibold" + (!this.state.spin ? "" : " hidden")
-                  }
-                >
-                  Continue
+                <input
+                  id="email"
+                  type={"text"}
+                  className="w-full h-full border border-gray-900 rounded focus:outline-none"
+                  placeholder="Email"
+                  onChange={() => {
+                    if (this.code["remove-border-on-change"])
+                      return this.removeBorderFromBoth();
+                    document.querySelector("#email-err").textContent = "";
+                    document.querySelector("#email").style.border =
+                      "1px solid black";
+                  }}
+                />
+                <span className={styles["floating-label"] + " text-gray-500"}>
+                  Email
                 </span>
               </div>
-            </button>
-          </form>
+              <span
+                id="email-err"
+                className="text-red-600 font-medium text-sm relative"
+                style={{ top: "-15px" }}
+              ></span>
+              <div
+                className={
+                  "flex gap-10 w-full h-12 border border-gray-900 rounded my-2 min-w-fit relative " +
+                  styles["input-wrapper"]
+                }
+                style={{
+                  paddingLeft: "2px",
+                  paddingRight: "2px",
+                }}
+                id="password-parent"
+              >
+                <input
+                  id="password"
+                  type={"password"}
+                  placeholder="Password"
+                  className="w-2/3 h-11 focus:outline-none"
+                  onChange={() => {
+                    if (this.code["remove-border-on-change"])
+                      return this.removeBorderFromBoth();
+                    document.querySelector("#password-err").textContent = "";
+                    document.querySelector("#password-parent").style.border =
+                      "1px solid black";
+                  }}
+                />
+                <span className={styles["floating-label"] + " text-gray-500"}>
+                  Password
+                </span>
+                <span
+                  className="text-sm mt-2 h-fit mx-2 font-medium hover:cursor-pointer hover:bg-orange-300 rounded-full px-3 py-1.5 transition-all"
+                  onClick={(e) => {
+                    const current = e.target.textContent;
+                    if (current == "Show") {
+                      e.target.textContent = "Hide";
+                      document.getElementById("password").type = "text";
+                    } else {
+                      e.target.textContent = "Show";
+                      document.getElementById("password").type = "password";
+                    }
+                  }}
+                >
+                  Show
+                </span>
+              </div>
+              <span
+                id="password-err"
+                className="text-red-600 font-medium text-sm relative block"
+                style={{ top: "-5px" }}
+              ></span>
+              <Link href="/resetpwd">
+                <a className="text-blue-700 font-medium text-md hover:underline">
+                  Forgot password?
+                </a>
+              </Link>
+              <div className="h-5 w-full"></div>
+              <Recaptcha
+                ref={this.captchaRef}
+                sitekey={recaptcha_site_key}
+                onVerify={(response) => {
+                  document.querySelector("#captcha-err").textContent = "";
+                  document.querySelector("#con-btn").disabled = false;
+                  document
+                    .querySelector("#con-btn")
+                    .classList.replace("cursor-not-allowed", "cursor-pointer");
+                  this.setState({ response });
+                }}
+              />
+              <span
+                className="text-red-600 font-medium text-sm relative block"
+                id="captcha-err"
+              ></span>
+              <div className="h-2 w-full"></div>
+              <button
+                id="con-btn"
+                disabled
+                className="flex cursor-not-allowed block mt-10 text-center border-none outline-none focus:outline-none w-full bg-orange-400 text-white p-3 hover:bg-orange-500 focus:bg-orange-500 rounded-full transition-all"
+              >
+                <div className="w-fit mx-auto flex">
+                  <svg
+                    className={
+                      "animate-spin -ml-1 mr-3 h-5 w-5 text-white" +
+                      (this.state.spin ? "" : " hidden")
+                    }
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+
+                  <span
+                    className={
+                      "font-semibold" + (!this.state.spin ? "" : " hidden")
+                    }
+                  >
+                    Continue
+                  </span>
+                </div>
+              </button>
+            </form>
+          </div>
+          <div
+            className="mx-auto min-w-fit mt-5 text-center"
+          >
+            <span>Don&apos;t have an account? </span>
+            <Link href="/register">
+              <a className="text-blue-700 font-medium text-md hover:underline">
+                Create now
+              </a>
+            </Link>
+          </div>
         </div>
-        <div className="mx-auto min-w-fit mt-5 text-center">
-          <span>Don&apos;t have an account? </span>
-          <Link href="/register">
-            <a className="text-blue-700 font-medium text-md hover:underline">
-              Create now
-            </a>
-          </Link>
-        </div>
-      </div>
+      </>
     );
   }
 }
