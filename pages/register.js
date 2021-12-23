@@ -93,7 +93,8 @@ export default class Register extends Component {
         this.captchaRef.current.reset();
         return;
       }
-      window.location.href = "/email-verification?session=" + json.session;
+      window.location.href =
+        "/session_verify?session=" + json.session + "&verify=verify-email";
     } catch {
       this.setState({ spin: false });
       this.triggerEmailErr();
@@ -236,7 +237,7 @@ export default class Register extends Component {
                 className="cursor-not-allowed block mt-10 text-center border-none outline-none focus:outline-none w-full bg-orange-400 text-white p-3 hover:bg-orange-500 focus:bg-orange-500 rounded-full transition-all"
               >
                 <div className="w-fit mx-auto flex">
-                <Spinner visible={this.state.spin} />
+                  <Spinner visible={this.state.spin} />
                   <span
                     className={
                       "font-semibold" + (!this.state.spin ? "" : " hidden")

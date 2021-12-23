@@ -46,3 +46,14 @@ a {
 button {
   -webkit-tap-highlight-color: transparent;
 }
+.scaleUp {
+  animation: scale-up 0.3s ease-in-out;
+}
+@keyframes scale-up {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
