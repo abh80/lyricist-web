@@ -192,7 +192,7 @@ export default class Login extends Component {
                 className="text-red-600 font-medium text-sm relative block"
                 style={{ top: "-5px" }}
               ></span>
-              <Link href="/resetpwd">
+              <Link href="/reset-password">
                 <a className="text-blue-700 font-medium text-md hover:underline">
                   Forgot password?
                 </a>

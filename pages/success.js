@@ -37,7 +37,10 @@ export default function () {
         </div>
         {text && (
           <div className="w-fit h-fit mx-auto mt-2 md:mt-5">
-            <button onClick={()=>window.location.href = redirectTo || "/"} className=" w-fit p-2 text-center bg-orange-500 rounded shadow-lg hover:bg-orange-600 transition-colors text-white text-lg font-semibold">
+            <button
+              onClick={() => (window.location.href = redirectTo || "/")}
+              className=" w-fit p-2 text-center bg-orange-500 rounded shadow-lg hover:bg-orange-600 transition-colors text-white text-lg font-semibold"
+            >
               Continue
             </button>
           </div>

@@ -32,7 +32,7 @@ a {
   top: 100px;
   background: linear-gradient(
     to bottom,
-    rgba(255, 138, 78, 1) 0%,
+    #ff8a4e 0%,
     rgb(248, 173, 136) 100%
   );
   user-select: none;

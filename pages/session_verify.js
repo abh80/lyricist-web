@@ -3,7 +3,7 @@ import { withRouter } from "next/router";
 import { Component } from "react";
 import Header from "../components/Header";
 import Spinner from "../components/Spinner";
-import { apiUrl } from "../config.json";
+const { apiUrl } = require("../config.json");
 import styles from "../styles/Login.module.css";
 class Session_Verify extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class Session_Verify extends Component {
   async handleSubmit(e) {
     e.preventDefault();
     if (!this.state.verificationType) return;
+    if (this.state.spin) return;
     document.querySelector("#err").textContent = "";
     const { session, verificationType } = this.state;
     if (verificationType == "verify-email") {
@@ -42,7 +43,9 @@ class Session_Verify extends Component {
           document.querySelector("#err").textContent = json.message;
           return;
         }
-        this.props.router.push("/success?text=Successfully+created+account+website+not+complete&redirectTo=/login");
+        this.props.router.push(
+          "/success?text=Successfully+created+account+website+not+complete&redirectTo=/login"
+        );
       } catch {
         this.setState({ spin: false });
         document.querySelector("#err").textContent =

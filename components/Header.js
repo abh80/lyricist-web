@@ -1,12 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+const { site_url } = require("../config.json");
 
 export default function Header({ title }) {
   return (
     <div className="absolute top-0 w-full h-full">
       <Head>
         <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta property="og:image" content={`${site_url}/logo-round.jpg`} />
+        <meta property="og:url" content={site_url} />
+        <meta
+          property="og:description"
+          content={"World's largest lyrics collection."}
+        />
+         <meta property="og:site_name" content="Lyricist" />
+        <meta property="og:theme" content="#ff8a4e" />
       </Head>
       <div className="w-full flex select-none">
         <div

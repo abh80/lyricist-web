@@ -144,7 +144,7 @@ export default class Register extends Component {
               <label className="text-gray-600">Email</label>
               <input
                 id="email"
-                type={"text"}
+                type={"email"}
                 className="w-full h-12 border border-gray-900 rounded p-2 focus:outline-none"
                 onChange={() => {
                   document.querySelector("#email-err").textContent = "";
