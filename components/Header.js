@@ -9,7 +9,7 @@ export default function Header({ title }) {
       <Head>
         <title>{title}</title>
         <meta property="og:title" content={title} />
-        <meta property="og:image" content={`${site_url}/logo-round.jpg`} />
+        <meta property="og:image" content={`${site_url}/logo-round.png`} />
         <meta property="og:url" content={site_url} />
         <meta
           property="og:description"
